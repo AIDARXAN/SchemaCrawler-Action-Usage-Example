@@ -11,7 +11,7 @@
     sql: SELECT TOP 1 2 FROM ${table}
  # Linters can be turned off with the "run" option   
 - id: schemacrawler.tools.linter.LinterTableSql
-  run: false
+  run: true
   config:
     message: message D
     sql: SELECT TOP 1 2 FROM ${table}
@@ -29,7 +29,7 @@
 - id: schemacrawler.tools.linter.LinterNullColumnsInIndex
   run: false
 - id: schemacrawler.tools.linter.LinterNullIntendedColumns
-  run: false
+  run: true
 - id: schemacrawler.tools.linter.LinterRedundantIndexes
   run: false
 - id: schemacrawler.tools.linter.LinterTableCycles
@@ -41,13 +41,13 @@
 # Certain columns can be excluded from the linter  
 - id: schemacrawler.tools.linter.LinterTableWithQuotedNames
   run: true
-  column-exclusion-pattern: .*\.\"UPDATE\"
+#  column-exclusion-pattern: .*\.\"UPDATE\"
 - id: schemacrawler.tools.linter.LinterTableWithSingleColumn
   run: true
 - id: schemacrawler.tools.linter.LinterTooManyLobs
-  run: false
+  run: true
 - id: schemacrawler.tools.linter.LinterColumnTypes
-  run: false
+  run: true
 - id: schemacrawler.tools.linter.LinterTableEmpty
   run: false
 - id: schemacrawler.tools.linter.LinterTableWithNoPrimaryKey
