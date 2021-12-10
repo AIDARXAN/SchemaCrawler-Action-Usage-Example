@@ -1,10 +1,11 @@
 - id: schemacrawler.tools.linter.LinterTableSql
   config:
     message: Lint message A
-    sql: SELECT TOP 1 1 FROM ${table}
+    sql: SELECT * FROM ${table}
 # The same linter can be configured multiple times with different options    
 - id: schemacrawler.tools.linter.LinterTableSql
   table-exclusion-pattern: .*BOOKS
+  run: false
   config:
     message: Lint message A
     sql: SELECT TOP 1 2 FROM ${table}
@@ -17,7 +18,7 @@
 - id: schemacrawler.tools.linter.LinterCatalogSql
   config:
     message: message for SQL catalog lint
-    sql: SELECT TOP 1 1 FROM INFORMATION_SCHEMA.TABLES
+    sql: SELECT * FROM INFORMATION_SCHEMA.TABLES
 # All available linters run by default, so they need to be explicitly turned off
 - id: schemacrawler.tools.linter.LinterForeignKeyMismatch
   run: false
@@ -32,7 +33,7 @@
 - id: schemacrawler.tools.linter.LinterRedundantIndexes
   run: false
 - id: schemacrawler.tools.linter.LinterTableCycles
-  run: false
+  run: true
 - id: schemacrawler.tools.linter.LinterTableWithIncrementingColumns
   run: false
 - id: schemacrawler.tools.linter.LinterTableWithNoIndexes
@@ -52,7 +53,7 @@
 - id: schemacrawler.tools.linter.LinterTableWithNoPrimaryKey
   run: false
 - id: schemacrawler.tools.linter.LinterTableAllNullableColumns
-  run: false
+  run: true
 - id: schemacrawler.tools.linter.LinterTableWithNoRemarks
   run: false
 - id: schemacrawler.tools.linter.LinterTableWithPrimaryKeyNotFirst
