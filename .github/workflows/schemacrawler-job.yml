@@ -1,6 +1,9 @@
 name: SchemaCrawler Job to Create Schema Diagram
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
 
 jobs:
   schemacrawler-job:
@@ -18,7 +21,7 @@ jobs:
         uses: schemacrawler/SchemaCrawler-Action@v16.16.3
         with:
           entrypoint: /schemacrawler.sh
-          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD --info-level=standard --command=brief --output-file database-diagram.png --log-level=CONFIG
+          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD --output-file database-diagram.png --info-level=standard --command=schema --log-level=CONFIG --title "Secjure database"
         env:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -29,6 +32,14 @@ jobs:
         with:
           name: database-diagram
           path: database-diagram.png
+
+      - uses: actions/checkout@v1
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "Documentation"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
