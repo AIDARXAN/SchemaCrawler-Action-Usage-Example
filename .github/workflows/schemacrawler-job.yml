@@ -11,15 +11,6 @@ jobs:
 
     name: SchemaCrawler Job to Create Schema Diagram
     steps:
-      - uses: actions/checkout@v1
-      # Additional steps to generate documentation in "Documentation" directory
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: "Documentation"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@v2
@@ -40,6 +31,16 @@ jobs:
         with:
           name: database-diagram
           path: database-diagram.png
+
+      - uses: actions/checkout@v1
+          # Additional steps to generate documentation in "Documentation" directory
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          name: database-diagram
+          path: database-diagram.png
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
