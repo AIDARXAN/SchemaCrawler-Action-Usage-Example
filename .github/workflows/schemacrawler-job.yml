@@ -31,12 +31,19 @@ jobs:
 #        with:
 #          name: database-diagram
 #          path: database-diagram.png
+      - name: Step 1 - Create a temporary artifact downloads folder
+        run: mkdir documentation
 
+      - name: step 2 - Add artifacts to publish to the temp folder
+        run: |
+          cd documentation
+          echo database-diagram.png > doc.md
+          cd ..
 
       - id: upload-documentation-to-wiki
         uses: SwiftDocOrg/github-wiki-publish-action@rsync
         with:
-          path: database-diagram.png
+          path: documentation/doc.md
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
