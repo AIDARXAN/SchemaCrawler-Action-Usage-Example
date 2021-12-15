@@ -25,28 +25,18 @@ jobs:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
 
-      - name: Step 1 - Create a temporary artifact downloads folder
-        run: mkdir documentation
-
-      - name: step 2 - Add artifacts to publish to the temp folder
-        run: |
-          cd documentation
-          echo database-diagram.png > doc.md
-          cd ..
-
       - id: upload-database-diagram
         name: Upload SchemaCrawler database diagram
         uses: actions/upload-artifact@v2
         with:
           name: database-diagram
-          path: documentation
+          path: database-diagram.png
 
       - uses: actions/checkout@v1
-          # Additional steps to generate documentation in "Documentation" directory
       - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@rsync
+        uses: SwiftDocOrg/github-wiki-publish-action@1.0.0
         with:
-          path: documentation
+          path: "Documentation"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
