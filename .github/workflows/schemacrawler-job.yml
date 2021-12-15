@@ -25,18 +25,18 @@ jobs:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
 
-      - id: upload-database-diagram
-        name: Upload SchemaCrawler database diagram
-        uses: actions/upload-artifact@v2
-        with:
-          name: database-diagram
-          path: database-diagram.png
+#      - id: upload-database-diagram
+#        name: Upload SchemaCrawler database diagram
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: database-diagram
+#          path: database-diagram.png
 
       - uses: actions/checkout@v1
       - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@1.0.0
+        uses: SwiftDocOrg/github-wiki-publish-action@rsync
         with:
-          path: "Documentation"
+          path: database-diagram.png
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
