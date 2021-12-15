@@ -33,7 +33,7 @@ jobs:
 #          path: database-diagram.png
 
 
-      - id: Upload Documentation to Wiki
+      - id: upload-documentation-to-wiki
         uses: SwiftDocOrg/github-wiki-publish-action@rsync
         with:
           path: database-diagram.png
