@@ -48,7 +48,7 @@ jobs:
         with:
           path: documentation
         env:
-          GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
