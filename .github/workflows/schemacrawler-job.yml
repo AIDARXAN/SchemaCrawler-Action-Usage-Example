@@ -32,8 +32,8 @@ jobs:
 #          name: database-diagram
 #          path: database-diagram.png
 
-      - uses: actions/checkout@v1
-      - name: Upload Documentation to Wiki
+
+      - id: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@rsync
         with:
           path: database-diagram.png
