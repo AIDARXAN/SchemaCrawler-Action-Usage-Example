@@ -40,7 +40,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: 'nightly'
           files: |
-            ./artifact/*
+            ./*
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
