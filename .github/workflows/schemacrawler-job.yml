@@ -34,19 +34,13 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          path: database-diagram.png
+          path: database-diagram
       - uses: eine/tip@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: 'nightly'
           files: |
-            ./artifact/
-#      - id: upload-documentation-to-wiki
-#        uses: SwiftDocOrg/github-wiki-publish-action@rsync
-#        with:
-#          path: documentation/doc.md
-#        env:
-#          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+            ./artifact/database-diagram
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
