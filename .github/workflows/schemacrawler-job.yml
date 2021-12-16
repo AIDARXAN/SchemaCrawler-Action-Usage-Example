@@ -32,15 +32,15 @@ jobs:
           name: database-diagram
           path: database-diagram.png
 
-      - name: Step 1 - Create a temporary artifact downloads folder
-        run: |
-          git lfs track "database-diagram.png"
-          git add .gitattributes
-          git add database-diagram.png
-          git commit -m "Update database-diagram"
-          git push origin dev
-
-
+      - uses: actions/download-artifact@v2
+        with:
+          path: database-diagram.png
+      - uses: eine/tip@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: 'nightly'
+          files: |
+            ./artifact/
 #      - id: upload-documentation-to-wiki
 #        uses: SwiftDocOrg/github-wiki-publish-action@rsync
 #        with:
