@@ -25,12 +25,12 @@ jobs:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
 
-#      - id: upload-database-diagram
-#        name: Upload SchemaCrawler database diagram
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: database-diagram
-#          path: database-diagram.png
+      - id: upload-database-diagram
+        name: Upload SchemaCrawler database diagram
+        uses: actions/upload-artifact@v2
+        with:
+          name: database-diagram
+          path: database-diagram.png
 
       - uses: actions/download-artifact@v2
         with:
@@ -38,9 +38,9 @@ jobs:
       - uses: eine/tip@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: 'nightly'
+          tag: 'development'
           files: |
-            ./*
+            ./database-diagram.png
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
