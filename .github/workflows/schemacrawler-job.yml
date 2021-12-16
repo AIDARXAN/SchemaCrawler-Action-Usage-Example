@@ -33,20 +33,20 @@ jobs:
           path: database-diagram.png
 
       - name: Step 1 - Create a temporary artifact downloads folder
-        run: mkdir documentation
-
-      - name: step 2 - Add artifacts to publish to the temp folder
         run: |
-          cd documentation
-          echo '[alt text](../database-diagram.png)' > doc.md
-          cd ..
+          git lfs track "database-diagram.png"
+          git add .gitattributes
+          git add database-diagram.png
+          git commit -m "Update database-diagram"
+          git push origin dev
 
-      - id: upload-documentation-to-wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@rsync
-        with:
-          path: documentation/doc.md
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+#      - id: upload-documentation-to-wiki
+#        uses: SwiftDocOrg/github-wiki-publish-action@rsync
+#        with:
+#          path: documentation/doc.md
+#        env:
+#          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
