@@ -23,7 +23,7 @@ jobs:
         with:
           filters: |
             migrations:
-              - '**/migrations/**'
+              - '**/migrations/*'
 
   schemacrawler-job:
     runs-on: ubuntu-latest
