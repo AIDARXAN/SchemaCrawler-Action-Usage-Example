@@ -3,7 +3,7 @@ name: SchemaCrawler Job to Create Schema Diagram
 on:
   push:
     paths:
-      - '**/migrations/**'
+      - '**/migrations/**.py'
 
 jobs:
   schemacrawler-job:
