@@ -2,8 +2,8 @@ name: SchemaCrawler Job to Create Schema Diagram
 
 on:
   push:
-    branches:
-      - dev
+    paths:
+      - '**/migrations/**'
 
 jobs:
   schemacrawler-job:
