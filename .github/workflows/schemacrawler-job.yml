@@ -68,4 +68,3 @@ jobs:
         run: |
           [ ${{ steps.schemacrawler.outputs.exit_status }} -eq 0 ] && echo "SchemaCrawler run succeeded" || echo "SchemaCrawler run failed"
           [ ${{ steps.schemacrawler.outputs.exit_status }} -eq 0 ] || exit 1
-
