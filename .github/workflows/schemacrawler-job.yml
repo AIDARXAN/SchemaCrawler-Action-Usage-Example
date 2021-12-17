@@ -2,13 +2,32 @@ name: SchemaCrawler Job to Create Schema Diagram
 
 on:
   push:
-    paths:
-      - '**/migrations/**.py'
+    branches:
+      - main
+      - stage
+      - dev
+#    paths:
+#      - '**/migrations/**.py'
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      migrations: ${{ steps.filter.outputs.backend }}
+    steps:
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            migrations:
+              - '**/migrations/**'
+
   schemacrawler-job:
     runs-on: ubuntu-latest
-
+    needs:
+      - changes
+    if: github.ref == 'refs/heads/dev'
     name: SchemaCrawler Job to Create Schema Diagram
     steps:
       - id: checkout
