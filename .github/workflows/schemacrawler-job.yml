@@ -8,8 +8,6 @@ on:
       - '**/migrations/**.py'
 
 jobs:
-
-
   schemacrawler-job:
     runs-on: ubuntu-latest
     name: SchemaCrawler Job to Create Schema Diagram
