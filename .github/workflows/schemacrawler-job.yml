@@ -13,7 +13,7 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      migrations: ${{ steps.filter.outputs.backend }}
+      migrations: ${{ steps.filter.outputs.migrations }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - changes
-    if: ${{ github.ref == 'refs/heads/dev' && needs.changes.outputs.backend == 'true' }}
+    if: ${{ github.ref == 'refs/heads/dev' && needs.changes.outputs.migrations == 'true' }}
     name: SchemaCrawler Job to Create Schema Diagram
     steps:
       - id: checkout
