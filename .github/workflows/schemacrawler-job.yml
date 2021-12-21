@@ -21,7 +21,7 @@ jobs:
         uses: schemacrawler/SchemaCrawler-Action@v16.16.3
         with:
           entrypoint: /schemacrawler.sh
-          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD --outputformat=svg,png --output-file database-diagram --info-level=standard --command=schema --log-level=CONFIG --title "Secjure database"
+          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD --outputformat=svg --outputformat=png --output-file database-diagram --info-level=standard --command=schema --log-level=CONFIG --title "Secjure database"
         env:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -31,7 +31,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: database-diagram
-          path: database-diagram
+          path: database-diagram.svg, database-diagram.png
+
 
       - uses: actions/download-artifact@v2
         with:
@@ -41,7 +42,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: 'test'
           files: |
-            ./
+            ./database-diagram.svg
+            ./database-diagram.png
 
       - id: check-success
         name: Fail the entire job if SchemaCrawler run failed
