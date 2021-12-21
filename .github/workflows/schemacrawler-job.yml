@@ -21,7 +21,7 @@ jobs:
         uses: schemacrawler/SchemaCrawler-Action@v16.16.3
         with:
           entrypoint: /schemacrawler.sh
-          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD --output-file database-diagram.svg --info-level=standard --command=schema --log-level=CONFIG --title "Secjure database"
+          args: --server=postgresql --database=compliance-platform-dev --host=${{ secrets.HOST }} --user:env USER --password:env PASSWORD outputformat=svg,png --output-file database-diagram --info-level=standard --command=schema --log-level=CONFIG --title "Secjure database"
         env:
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -39,7 +39,7 @@ jobs:
       - uses: eine/tip@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: 'development'
+          tag: 'test'
           files: |
             ./database-diagram.svg
 
